@@ -16,8 +16,8 @@ export const createTodoCtrl = (req, res) => {
 }
 
 export const deleteTodoCtrl = (req, res) => {
-  const {id}= req.params;
-  const deleteTodo = deleteTask(id);
+  const owner = req.params.id;
+  const deleteTodo = deleteTask(owner);
   if (deleteTodo) {
     res.json({deleteTodo})
   } else {
@@ -35,5 +35,4 @@ export const updateTodoCtrl = (req, res) => {
   } else {
     res.status(404).json({ message: "Tarea no encontrada" });
   }
-  
 }

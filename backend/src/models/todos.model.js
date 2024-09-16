@@ -5,7 +5,7 @@ export const createTask = (title, completed, owner) => {
 
     const newTodo = {
         id: lastId + 1,
-        title,
+        title: title.trim(),
         completed,
         owner
     }
@@ -15,9 +15,9 @@ export const createTask = (title, completed, owner) => {
 }
 
 export const updateTask = (id, title, completed, owner) => {
-    const todo = database.todos.find((todo) => todo.id === id);
+    const todo = database.todos.find((todo) => todo.id === +id);
     if (todo) {
-        todo.title = title;
+        todo.title = title.trim();
         todo.completed = completed;
         todo.owner = owner;
         return todo;
@@ -28,7 +28,7 @@ export const updateTask = (id, title, completed, owner) => {
 }
 
 export const deleteTask = (id) => {
-    const todoIndex = database.todos.findIndex((todo) => todo.id === id)
+    const todoIndex = database.todos.findIndex((todo) => todo.id === +id)
     if (todoIndex !== -1 ) {
         const deleteTodo = database.todos.splice(todoIndex, 1);
         return deleteTodo[0];
